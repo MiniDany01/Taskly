@@ -20,6 +20,17 @@ const notyf = new Notyf({
   ],
 });
 
+function getToken() {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
+}
+
+function getUser() {
+  return (
+    JSON.parse(localStorage.getItem("user")) ||
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
   loadSubjects();
@@ -27,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const toogleBtn = document.getElementById("toggleSidebar");
   const sidebar = document.querySelector(".sidebar");
   const main = document.querySelector(".main");
-  const token = localStorage.getItem("token");
+  const token = getToken();
   const logoutBtn = document.querySelector(".logout");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getUser();
   const userName = document.querySelector(".user-info strong");
   const modal = document.getElementById("subjectModal");
   const openModalBtn = document.getElementById("openModal");
@@ -40,6 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location.href = "/pages/login";
   });
 
@@ -82,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const res = await fetch(`/api/subjects/${subjectToDelete}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         });
 
@@ -197,7 +211,7 @@ document.getElementById("saveSubject").addEventListener("click", async () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify({ name, color: selectedColor }),
     });
@@ -208,7 +222,7 @@ document.getElementById("saveSubject").addEventListener("click", async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify({ name, color: selectedColor }),
     });
@@ -236,7 +250,7 @@ function resetModal() {
 }
 
 async function loadSubjects() {
-  const token = localStorage.getItem("token");
+  const token = getToken();
   const emptyState = document.getElementById("emptyState");
   const container = document.getElementById("subjectsContainer");
 

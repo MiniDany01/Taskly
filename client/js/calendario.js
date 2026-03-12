@@ -18,6 +18,17 @@ const notyf = new Notyf({
   ],
 });
 
+function getToken() {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
+}
+
+function getUser() {
+  return (
+    JSON.parse(localStorage.getItem("user")) ||
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
@@ -25,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".sidebar");
   const main = document.querySelector(".main");
   const logoutBtn = document.querySelector(".logout");
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  const user = getUser();
+  const token = getToken();
   const userName = document.querySelector(".user-info strong");
 
   const calendarEl = document.getElementById("calendar");
@@ -120,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${getToken()}`,
           },
           body: JSON.stringify({
             dueDate: info.event.startStr,
@@ -165,6 +176,9 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location.href = "/pages/login";
   });
 
@@ -204,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadCalendarTasks() {
   const res = await fetch("/api/calendar/tasks", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${getToken()}`,
     },
   });
 

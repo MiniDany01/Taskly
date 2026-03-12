@@ -16,6 +16,17 @@ const notyf = new Notyf({
   ],
 });
 
+function getToken() {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
+}
+
+function getUser() {
+  return (
+    JSON.parse(localStorage.getItem("user")) ||
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
   loadProfile();
@@ -24,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".sidebar");
   const main = document.querySelector(".main");
   const logoutBtn = document.querySelector(".logout");
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  const user = getUser();
+  const token = getToken();
   const userName = document.querySelector(".user-info strong");
 
   const toggle2FA = document.getElementById("toggle2FA");
@@ -64,6 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location.href = "/pages/login";
   });
 
@@ -76,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({
           taskReminder: reminder === "" ? null : parseInt(reminder),
@@ -103,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
           },
           body: JSON.stringify({
             currentPassword,
@@ -141,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ name }),
       });
@@ -170,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("/api/users/me/2fa/setup", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
 
@@ -200,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ token: code }),
       });
@@ -247,7 +261,7 @@ async function loadUserData() {
   try {
     const res = await fetch("/api/users/me", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
 
@@ -331,7 +345,7 @@ function setupPasswordToggles() {
 async function loadProfile() {
   const res = await fetch("/api/users/me", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${getToken()}`,
     },
   });
 
