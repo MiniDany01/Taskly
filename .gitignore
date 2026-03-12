@@ -1,0 +1,17 @@
+node_modules
+.env
+dist
+
+/generated/prisma
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode

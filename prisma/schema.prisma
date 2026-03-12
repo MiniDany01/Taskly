@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String?
+  provider  String   @default("local")
+  createdAt DateTime @default(now())
+  twoFactorEnabled Boolean @default(false)
+  twoFactorSecret  String?
+  taskReminder  Int? @default(1)
+
+  subjects Subject[]
+  tasks Task[]
+}
+
+model Subject {
+  id        String   @id @default(uuid())
+  name      String
+  color     String @default("#007bff")
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  tasks     Task[]
+
+  createdAt DateTime @default(now())
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  dueDate     DateTime
+  completed   Boolean  @default(false)
+  urgent      Boolean  @default(false)
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}

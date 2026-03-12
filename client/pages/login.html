@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets//images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../assets/images/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/images/favicon-512x512.png"
+    />
+    <title>Taskly - Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <div class="form-blob">
+          <img
+            src="../assets/icons/blob.svg"
+            alt="blob"
+            class="blob-image blob-image--1"
+          />
+          <img
+            src="../assets/icons/blob.svg"
+            alt="blob"
+            class="blob-image blob-image--2"
+          />
+          <img
+            src="../assets/icons/blob.svg"
+            alt="blob"
+            class="blob-image blob-image--3"
+          />
+        </div>
+
+        <div class="form-header">
+          <p>Por favor, ingresa tus datos</p>
+          <h1>Bienvenido a Taskly</h1>
+        </div>
+
+        <form class="form-box">
+          <div class="input-group">
+            <input type="email" id="email" class="input-field" placeholder="" />
+            <label for="email" class="floating-label">Email</label>
+          </div>
+          <div class="input-group">
+            <input
+              type="password"
+              id="password"
+              class="input-field"
+              placeholder=""
+            />
+            <label for="password" class="floating-label">Contraseña</label>
+            <div class="eye-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-eye-icon lucide-eye"
+              >
+                <path
+                  d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="input-group checkbox-group">
+            <div class="form-col remember-me">
+              <input
+                type="checkbox"
+                id="remember-me-checkbox"
+                class="checkbox-field"
+              />
+              <label for="remember-me-checkbox">Recuerdame</label>
+            </div>
+            <div class="form-col">
+              <a href="#" class="form-link">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
+
+          <button type="submit" class="form-btn form-btn--submit">
+            Acceder
+          </button>
+        </form>
+
+        <div class="form-divider">
+          <p>O</p>
+        </div>
+
+        <div class="form-bottom">
+          <div class="form-socials">
+            <button class="form-btn form-btn--social">
+              <img
+                src="../assets/icons/google.svg"
+                class="btn-icon"
+                alt="social icon"
+              />
+            </button>
+
+            <button class="form-btn form-btn--social">
+              <img
+                src="../assets/icons/facebook.svg"
+                class="btn-icon"
+                alt="social icon"
+              />
+            </button>
+
+            <button class="form-btn form-btn--social">
+              <img
+                src="../assets/icons/apple.svg"
+                class="btn-icon"
+                alt="social icon"
+              />
+            </button>
+          </div>
+
+          <p>
+            ¿No tienes cuenta?
+            <a href="register" class="form-link">Registrate aquí</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="../js/login.js"></script>
+  </body>
+</html>

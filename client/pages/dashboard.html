@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets//images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../assets/images/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/images/favicon-512x512.png"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <title>Taskly</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div>
+        <div class="toggle-btn" id="toggleSidebar">
+          <i data-lucide="chevron-left"></i>
+        </div>
+        <div class="logo">Taskly</div>
+
+        <nav class="nav">
+          <a href="#" class="active" title="Dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="materias" title="Materias">
+            <i data-lucide="book-open"></i>
+            <span>Materias</span>
+          </a>
+          <a href="tareas" title="Tareas">
+            <i data-lucide="check-square"></i>
+            <span>Tareas</span>
+          </a>
+          <a href="estadisticas" title="Estadísticas">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Estadísticas</span>
+          </a>
+          <a href="calendario" title="Calendario">
+            <i data-lucide="calendar"></i>
+            <span>Calendario</span>
+          </a>
+          <a href="configuracion" title="Configuración">
+            <i data-lucide="bolt"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <i data-lucide="user"></i>
+          <span><strong>Cargando...</strong></span>
+        </div>
+
+        <div class="logout">
+          <i data-lucide="log-out"></i>
+          <span>Cerrar sesión</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="dashboard-header">
+        <h1>Resumen de la semana</h1>
+        <a href="tareas" class="btn-primary">
+          <i data-lucide="plus"></i>
+          Nueva tarea
+        </a>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- PROXIMAS ENTREGAS -->
+        <div class="card large-card">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="calendar-days"></i>
+              <h2>Próximas entregas</h2>
+            </div>
+          </div>
+
+          <ul class="task-list" id="upcomingTasks"></ul>
+
+          <div id="noUpcomingTasks" class="empty-state">
+            <i data-lucide="calendar-x"></i>
+            <p>No tienes tareas próximas.</p>
+          </div>
+
+          <button id="viewAllTasks" class="view-all-btn" style="display: none">
+            Ver todas →
+          </button>
+        </div>
+
+        <!-- URGENTES -->
+        <div class="card urgent-card">
+          <div class="card-title">
+            <i data-lucide="flame"></i>
+            <h2>Urgentes</h2>
+          </div>
+
+          <ul class="task-list" id="urgentTasks"></ul>
+
+          <div class="empty-state" id="noUrgentTasks" style="display: none">
+            <i data-lucide="flame"></i>
+            <p>No tienes tareas urgentes.</p>
+          </div>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="card summary-card">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="chart-column"></i>
+              <h2>Resumen</h2>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-box">
+              <strong id="totalTasks">0</strong>
+              <span>Total tareas</span>
+            </div>
+
+            <div class="summary-box">
+              <strong id="tasksThisWeek">0</strong>
+              <span>Por vencer esta semana</span>
+            </div>
+
+            <div class="summary-box">
+              <strong id="completedTasks">0</strong>
+              <span>Completadas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-actions">
+        <button class="circle-btn" title="Sobre Taskly" id="aboutBtn">
+          <i data-lucide="info"></i>
+        </button>
+
+        <button class="circle-btn" title="Agradecimientos" id="thanksBtn">
+          <i data-lucide="heart"></i>
+        </button>
+
+        <button class="circle-btn" title="Información" id="helpBtn">
+          <i data-lucide="help-circle"></i>
+        </button>
+      </div>
+    </main>
+
+    <div class="modal" id="tasksModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Próximas entregas</h2>
+          <button id="closeTasksModal">✕</button>
+        </div>
+
+        <ul id="modalTaskList"></ul>
+      </div>
+    </div>
+
+    <!-- MODAL SOBRE TASKLY -->
+    <div class="info-modal" id="aboutModal">
+      <div class="info-modal-content">
+        <button class="close-modal">✕</button>
+
+        <h2>
+          <i data-lucide="info"></i>
+          Taskly
+        </h2>
+        <p>
+          Taskly es una aplicación para organizar tareas escolares y mejorar tu
+          productividad.
+        </p>
+
+        <p><strong>Versión:</strong> 1.0</p>
+        <p><strong>Desarrollado por:</strong> Daniel González</p>
+
+        <p><strong>Fecha de creación: </strong>14 de Febrero de 2026</p>
+      </div>
+    </div>
+
+    <!-- MODAL AGRADECIMIENTOS -->
+    <div class="info-modal" id="thanksModal">
+      <div class="info-modal-content">
+        <button class="close-modal">✕</button>
+
+        <h2>
+          <i data-lucide="heart"></i>
+          Agradecimientos
+        </h2>
+
+        <a
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+          target="_blank"
+          class="thanks-link"
+        >
+          <!-- <i data-lucide="heart"></i> -->
+          Gracias por el apoyo durante el desarrollo de esta página
+        </a>
+
+        <!-- <ul>
+          <li>Lucide Icons</li>
+          <li>Chart.js</li>
+          <li>Notyf</li>
+          <li>TomSelect</li>
+        </ul> -->
+      </div>
+    </div>
+
+    <!-- MODAL AYUDA -->
+    <div class="info-modal" id="helpModal">
+      <div class="info-modal-content">
+        <button class="close-modal">✕</button>
+
+        <h2>
+          <i data-lucide="help-circle"></i>
+          ¿Cómo usar Taskly?
+        </h2>
+
+        <ul>
+          <li>Crea materias para organizar tus clases.</li>
+          <li>Agrega tareas con fecha de entrega.</li>
+          <li>Marca tareas como urgentes.</li>
+          <li>Completa tareas para mantener tu racha.</li>
+          <li>Consulta estadísticas de productividad.</li>
+          <li>
+            La verificación en dos pasos se debe hacer con
+            <span style="font-weight: bold">Google Authenticator</span>.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

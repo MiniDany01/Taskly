@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets//images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../assets/images/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/images/favicon-512x512.png"
+    />
+    <link rel="stylesheet" href="../css/calendario.css" />
+    <title>Taskly - Calendario</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div>
+        <div class="toggle-btn" id="toggleSidebar">
+          <i data-lucide="chevron-left"></i>
+        </div>
+        <div class="logo">Taskly</div>
+
+        <nav class="nav">
+          <a href="dashboard" title="Dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="materias" title="Materias">
+            <i data-lucide="book-open"></i>
+            <span>Materias</span>
+          </a>
+          <a href="tareas" title="Tareas">
+            <i data-lucide="check-square"></i>
+            <span>Tareas</span>
+          </a>
+          <a href="estadisticas" title="Estadísticas">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Estadísticas</span>
+          </a>
+          <a href="#" title="Calendario" class="active">
+            <i data-lucide="calendar"></i>
+            <span>Calendario</span>
+          </a>
+          <a href="configuracion" title="Configuración">
+            <i data-lucide="bolt"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <i data-lucide="user"></i>
+          <span><strong>Cargando...</strong></span>
+        </div>
+
+        <div class="logout">
+          <i data-lucide="log-out"></i>
+          <span>Cerrar sesión</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="calendar-header">
+        <h1>Calendario</h1>
+        <p class="calendar-subtitle">
+          Visualiza todas tus taras organizadas por fecha
+        </p>
+      </div>
+
+      <div class="calendar-container">
+        <div id="calendar"></div>
+      </div>
+
+      <div class="modal" id="calendarTaskModal">
+        <div class="modal-content calendar-task-modal">
+          <div class="modal-header">
+            <h2 id="modalTaskTitle">Tarea</h2>
+            <button id="closeCalendarModal">✕</button>
+          </div>
+
+          <div class="modal-body">
+            <p>
+              <strong>Materia:</strong>
+              <span id="modalTaskSubject"></span>
+            </p>
+            <p>
+              <strong>Descripción:</strong>
+              <span id="modalTaskDescription"></span>
+            </p>
+          </div>
+
+          <div class="modal-footer">
+            <a href="/pages/tareas" class="btn-primary view-task-btn">
+              Ver tareas
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="../js/calendario.js"></script>
+  </body>
+</html>

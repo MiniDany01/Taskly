@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets//images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../assets/images/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/images/favicon-512x512.png"
+    />
+    <link rel="stylesheet" href="../css/tareas.css" />
+    <title>Taskly - Tareas</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div>
+        <div class="toggle-btn" id="toggleSidebar">
+          <i data-lucide="chevron-left"></i>
+        </div>
+        <div class="logo">Taskly</div>
+
+        <nav class="nav">
+          <a href="dashboard" title="Dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="materias" title="Materias">
+            <i data-lucide="book-open"></i>
+            <span>Materias</span>
+          </a>
+          <a href="#" title="Tareas" class="active">
+            <i data-lucide="check-square"></i>
+            <span>Tareas</span>
+          </a>
+          <a href="estadisticas" title="Estadísticas">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Estadísticas</span>
+          </a>
+          <a href="calendario" title="Calendario">
+            <i data-lucide="calendar"></i>
+            <span>Calendario</span>
+          </a>
+          <a href="configuracion" title="Configuración">
+            <i data-lucide="bolt"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <i data-lucide="user"></i>
+          <span><strong>Cargando...</strong></span>
+        </div>
+
+        <div class="logout">
+          <i data-lucide="log-out"></i>
+          <span>Cerrar sesión</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="page-header">
+        <h1>Tareas</h1>
+        <p class="page-subtitle">Gestiona y organiza todas tus tareas</p>
+        <button class="btn-primary" id="openModal">
+          <i data-lucide="plus"></i>
+          Nueva tarea
+        </button>
+      </div>
+
+      <div class="task-tabs">
+        <button class="tab-btn active" data-tab="pending">Pendientes</button>
+        <button class="tab-btn" data-tab="completed">Completadas</button>
+        <button class="tab-btn" data-tab="defeated">Vencidas</button>
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none">
+        <i data-lucide="clipboard-list"></i>
+        <h2>No hay tareas agregadas</h2>
+        <p>Crea tu primera tarea y comienza a organizar tu día</p>
+      </div>
+
+      <div class="tasks-list" id="tasksContainer"></div>
+
+      <!-- MODAL AGREGAR TAREA -->
+      <div class="modal" id="taskModal">
+        <div class="modal-content">
+          <h2>Nueva tarea</h2>
+
+          <input type="text" id="taskTitle" placeholder="Título de la tarea" />
+
+          <textarea
+            id="taskDescription"
+            placeholder="Descripción (opcional)"
+          ></textarea>
+
+          <div class="form-group">
+            <label for="taskDueDate" class="form-label">
+              Fecha de vencimiento
+            </label>
+
+            <input type="date" id="taskDueDate" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="taskDueTime" class="form-label"
+              >Hora de vencimiento</label
+            >
+            <input type="time" id="taskDueTime" class="form-input" />
+          </div>
+
+          <select id="taskSubject">
+            <option value="">Selecciona una materia</option>
+          </select>
+
+          <div class="modal-actions">
+            <button id="cancelTaskModal" class="btn-secondary">Cancelar</button>
+
+            <button id="saveTask" class="btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE MODAL -->
+      <div class="modal" id="deleteModal">
+        <div class="modal-content delete-modal">
+          <div class="delete-icon">
+            <i data-lucide="trash-2"></i>
+          </div>
+
+          <h2>Eliminar materia</h2>
+          <p>Esta acción no se puede deshacer.</p>
+
+          <div class="modal-actions">
+            <button id="cancelDelete" class="btn-secondary">Cancelar</button>
+            <button id="confirmDelete" class="btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+    <script src="../js/tareas.js"></script>
+  </body>
+</html>

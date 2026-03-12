@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="../assets/images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets//images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../assets/images/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/images/favicon-512x512.png"
+    />
+    <link rel="stylesheet" href="../css/materias.css" />
+    <title>Taskly - Materias</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div>
+        <div class="toggle-btn" id="toggleSidebar">
+          <i data-lucide="chevron-left"></i>
+        </div>
+        <div class="logo">Taskly</div>
+
+        <nav class="nav">
+          <a href="dashboard" title="Dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="#" class="active" title="Materias">
+            <i data-lucide="book-open"></i>
+            <span>Materias</span>
+          </a>
+          <a href="tareas" title="Tareas">
+            <i data-lucide="check-square"></i>
+            <span>Tareas</span>
+          </a>
+          <a href="estadisticas" title="Estadísticas">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Estadísticas</span>
+          </a>
+          <a href="calendario" title="Calendario">
+            <i data-lucide="calendar"></i>
+            <span>Calendario</span>
+          </a>
+          <a href="configuracion" title="Configuración">
+            <i data-lucide="bolt"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <i data-lucide="user"></i>
+          <span><strong>Cargando...</strong></span>
+        </div>
+
+        <div class="logout">
+          <i data-lucide="log-out"></i>
+          <span>Cerrar sesión</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="page-header">
+        <h1>Materias</h1>
+        <p class="page-subtitle">Organiza tus materias y gestiona tus tareas</p>
+        <button class="btn-primary" id="openModal">
+          <i data-lucide="plus"></i>
+          Nueva materia
+        </button>
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none">
+        <i data-lucide="book-open"></i>
+        <h2>No hay materias agregadas</h2>
+        <p>Agrega tus tareas para comenzar a organizar tus tareas</p>
+      </div>
+
+      <div class="subjects-grid" id="subjectsContainer">
+        <!-- TAREAS DINAMICAS -->
+      </div>
+
+      <div class="modal" id="subjectModal">
+        <div class="modal-content">
+          <h2 id="modalTitle">Nueva materia</h2>
+
+          <input
+            type="text"
+            id="subjectName"
+            placeholder="Nombre de la materia"
+          />
+
+          <div class="color-picker">
+            <label>Color</label>
+            <div class="color-options">
+              <span
+                class="color-circle"
+                data-color="#007bff"
+                style="background: #007bff"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#2563eb"
+                style="background: #2563eb"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#0ea5e9"
+                style="background: #0ea5e9"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#059669"
+                style="background: #059669"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#f59e0b"
+                style="background: #f59e0b"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#d97706"
+                style="background: #d97706"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#ef4444"
+                style="background: #ef4444"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#dc2626"
+                style="background: #dc2626"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#8b5cf6"
+                style="background: #8b5cf6"
+              ></span>
+              <span
+                class="color-circle"
+                data-color="#14b8a6"
+                style="background: #14b8a6"
+              ></span>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button id="cancelModal" class="btn-secondary">Cancelar</button>
+            <button id="saveSubject" class="btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL CONFIRMAR DELETE -->
+      <div class="modal" id="deleteModal">
+        <div class="modal-content delete-modal">
+          <div class="delete-icon">
+            <i data-lucide="trash-2"></i>
+          </div>
+
+          <h2>Eliminar materia</h2>
+          <p>Esta acción no se puede deshacer.</p>
+
+          <div class="modal-actions">
+            <button id="cancelDelete" class="btn-secondary">Cancelar</button>
+            <button id="confirmDelete" class="btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="../js/materias.js"></script>
+  </body>
+</html>
