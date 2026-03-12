@@ -1,14 +1,25 @@
 let allUpcomingTasks = [];
 
+function getToken() {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
+}
+
+function getUser() {
+  return (
+    JSON.parse(localStorage.getItem("user")) ||
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
   const toogleBtn = document.getElementById("toggleSidebar");
   const sidebar = document.querySelector(".sidebar");
   const main = document.querySelector(".main");
-  const token = localStorage.getItem("token");
+  const token = getToken();
   const logoutBtn = document.querySelector(".logout");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getUser();
   const userName = document.querySelector(".user-info strong");
 
   userName.textContent = user ? user.name : "User";
@@ -16,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location.href = "/pages/login";
   });
 
@@ -208,21 +222,21 @@ function renderSummary(summary) {
 
 async function loadDashboard() {
   try {
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     const [upcomingRes, urgentRes, summaryRes] = await Promise.all([
       fetch("/api/dashboard/upcoming", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       }),
       fetch("/api/dashboard/urgent", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       }),
       fetch("/api/dashboard/summary", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${getToken()}` },
       }),
     ]);
 

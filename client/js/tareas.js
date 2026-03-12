@@ -2,6 +2,17 @@ let subjectSelect;
 let taskToDelete = null;
 let editingTask = null;
 
+function getToken() {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
+}
+
+function getUser() {
+  return (
+    JSON.parse(localStorage.getItem("user")) ||
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+}
+
 const notyf = new Notyf({
   duration: 2500,
   dismissible: false,
@@ -15,9 +26,8 @@ const notyf = new Notyf({
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
-  const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  const token = getToken();
+  const user = getUser();
   if (!token || !user) {
     window.location.href = "/pages/login";
     return;
@@ -31,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location.href = "/pages/login";
   });
 
@@ -110,7 +123,7 @@ function initTaskActions() {
       const res = await fetch(`/api/tasks/${taskId}/toggle`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
 
@@ -141,7 +154,7 @@ function initTaskActions() {
       const res = await fetch(`/api/tasks/${taskId}/urgent`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
 
@@ -234,7 +247,7 @@ function initDeleteModal() {
         const res = await fetch(`/api/tasks/${taskId}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         });
 
@@ -315,7 +328,7 @@ function initTaskModal() {
         method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({
           title,
@@ -352,7 +365,7 @@ async function loadTasks() {
   try {
     const res = await fetch("/api/tasks", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
 
@@ -589,7 +602,7 @@ function closeAllDropdowns() {
 async function loadSubjectsForSelect() {
   const res = await fetch("/api/subjects", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${getToken()}`,
     },
   });
 
