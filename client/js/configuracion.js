@@ -86,19 +86,27 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", async () => {
       const reminder = document.getElementById("taskReminder").value;
 
-      const res = await fetch("/api/users/reminder", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-        body: JSON.stringify({
-          taskReminder: reminder === "" ? null : parseInt(reminder),
-        }),
-      });
+      try {
+        const res = await fetch("/api/users/reminder", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+          body: JSON.stringify({
+            taskReminder: reminder === "" ? null : parseInt(reminder),
+          }),
+        });
 
-      if (res.ok) {
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message);
+        }
+
         notyf.success("Preferencias guardadas");
+      } catch (error) {
+        notyf.error(error.message);
       }
     });
 
@@ -281,6 +289,19 @@ async function loadUserData() {
 
     if (user.twoFactorEnabled) {
       activate2FAUI();
+    }
+
+    /* 🔒 BLOQUEAR RECORDATORIOS SIN 2FA */
+
+    const reminderSelect = document.getElementById("taskReminder");
+    const warning = document.getElementById("reminder2faWarning");
+
+    if (!user.twoFactorEnabled) {
+      reminderSelect.disabled = true;
+      warning.classList.remove("hidden");
+    } else {
+      reminderSelect.disabled = false;
+      warning.classList.add("hidden");
     }
   } catch (error) {
     console.error("Error cargando usuario:", error);
