@@ -217,14 +217,25 @@ exports.updateReminder = async (req, res) => {
     const userId = req.user.id;
     const { taskReminder } = req.body;
 
-    const user = await prisma.user.update({
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (taskReminder !== null && !user.twoFactorEnabled) {
+      return res.status(500).json({
+        message:
+          "Debes activar la verificación en dos pasos para recibir recordatorios por correo.",
+      });
+    }
+
+    const updateUser = await prisma.user.update({
       where: { id: userId },
       data: {
         taskReminder,
       },
     });
 
-    res.json(user);
+    res.json(updateUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({

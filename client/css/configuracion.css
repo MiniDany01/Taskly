@@ -193,8 +193,9 @@ body {
 /* ===== MAIN ===== */
 .main {
   margin-left: 220px;
-  padding: 50px 40px 120px 40px;
+  padding: 50px 40px 40px;
   width: calc(100% - 220px);
+  min-height: 100vh;
 }
 
 /* HEADER */
@@ -488,14 +489,37 @@ body {
   font-size: 18px;
 }
 
+.reminder-warning {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+#taskReminder + #reminder2faWarning {
+  margin-bottom: 0;
+}
+
+#reminder2faWarning {
+  margin-top: 6px;
+}
+
+.reminder-group {
+  margin-bottom: 0;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .main {
-    padding: 40px 25px 100px 25px;
+    padding: 35px 20px 40px;
   }
 
   .config-wrapper {
-    max-width: 100%;
+    margin: 0 auto 40px auto;
   }
 }
 
@@ -507,7 +531,7 @@ body {
   .main {
     margin-left: 0;
     width: 100%;
-    padding: 25px 18px 80px 18px;
+    padding: 20px 16px 30px;
   }
 
   .page-header {
@@ -523,11 +547,16 @@ body {
   }
 
   .config-card {
-    padding: 18px;
+    padding: 16px;
+    margin-bottom: 20px;
   }
 
   .config-card h2 {
-    font-size: 16px;
+    font-size: 17px;
+  }
+
+  .form-group select {
+    height: 48px;
   }
 }
 

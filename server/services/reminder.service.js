@@ -27,6 +27,8 @@ async function sendTaskReminders() {
     // usuario desactivó recordatorios
     if (reminderDays === null || reminderDays === "") continue;
 
+    if (!task.user.twoFactorEnabled) continue;
+
     const reminderDate = new Date(task.dueDate);
     reminderDate.setDate(reminderDate.getDate() - reminderDays);
     reminderDate.setHours(0, 0, 0, 0);
