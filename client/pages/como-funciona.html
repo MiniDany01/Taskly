@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>¿Cómo funciona? - Taskly</title>
+
+    <link rel="stylesheet" href="../css/como-funciona.css" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+      <div class="logo">
+        <i data-lucide="check-square"></i>
+        <span>Taskly</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/" class="nav-link">Inicio</a>
+        <a href="/pages/funciones" class="nav-link">Funciones</a>
+        <!-- <a href="/pages/como-funciona" class="nav-link">¿Cómo funciona?</a> -->
+
+        <a href="/pages/login" class="btn-secondary">Acceder</a>
+        <a href="/pages/register" class="btn-primary">Crear cuenta</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <h1 data-aos="fade-up">¿Cómo funciona Taskly?</h1>
+
+      <p data-aos="fade-up" data-aos-delay="150">
+        Organiza tu semestre en minutos con un flujo simple y claro.
+      </p>
+    </section>
+
+    <!-- PASOS -->
+
+    <section class="steps">
+      <div class="step" data-aos="fade-right">
+        <div class="step-number">1</div>
+
+        <div class="step-content">
+          <i data-lucide="user-plus"></i>
+
+          <h2>Crea tu cuenta</h2>
+
+          <p>
+            Regístrate en segundos y accede a tu panel para comenzar a organizar
+            tus materias.
+          </p>
+        </div>
+      </div>
+
+      <div class="step reverse" data-aos="fade-left">
+        <div class="step-number">2</div>
+
+        <div class="step-content">
+          <i data-lucide="folder-plus"></i>
+
+          <h2>Agrega tus materias</h2>
+
+          <p>
+            Crea tus materias y asigna colores personalizados para
+            identificarlas fácilmente.
+          </p>
+        </div>
+      </div>
+
+      <div class="step" data-aos="fade-right">
+        <div class="step-number">3</div>
+
+        <div class="step-content">
+          <i data-lucide="check-square"></i>
+
+          <h2>Registra tus tareas</h2>
+
+          <p>
+            Agrega tareas con fecha de entrega y márcalas como completadas
+            cuando termines.
+          </p>
+        </div>
+      </div>
+
+      <div class="step reverse" data-aos="fade-left">
+        <div class="step-number">4</div>
+
+        <div class="step-content">
+          <i data-lucide="bell"></i>
+
+          <h2>Recibe recordatorios</h2>
+
+          <p>
+            Taskly te envía recordatorios antes de que tus tareas venzan para
+            que nunca olvides una entrega.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta">
+      <h2 data-aos="fade-up">Empieza a organizar tu semestre hoy</h2>
+
+      <a
+        href="/pages/register"
+        class="btn-primary big"
+        data-aos="fade-up"
+        data-aos-delay="150"
+      >
+        Crear cuenta gratis
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <i data-lucide="check-square"></i>
+            <span>Taskly</span>
+          </div>
+
+          <p>Organiza tus materias, tareas y entregas en un solo lugar.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Producto</h4>
+            <a href="./pages/funciones">Funciones</a>
+            <a href="./pages/como-funciona">¿Cómo funciona?</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Cuenta</h4>
+            <a href="/pages/login">Iniciar sesión</a>
+            <a href="/pages/register">Crear cuenta</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">© 2026 Taskly — Organizador académico</div>
+    </footer>
+
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
