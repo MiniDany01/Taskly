@@ -163,12 +163,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const updatedUser = await res.json();
       if (!res.ok) throw new Error(updatedUser.message);
 
+      let storedUser =
+        JSON.parse(localStorage.getItem("user")) ||
+        JSON.parse(sessionStorage.getItem("user"));
+
+      storedUser.name = updatedUser.name;
+
+      if (localStorage.getItem("user")) {
+        localStorage.setItem("user", JSON.stringify(storedUser));
+      } else {
+        sessionStorage.setItem("user", JSON.stringify(storedUser));
+      }
+
       document.querySelector(".user-info strong").textContent =
         updatedUser.name;
-
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      storedUser.name = updatedUser.name;
-      localStorage.setItem("user", JSON.stringify(storedUser));
 
       notyf.success("Nombre actualizado correctamente");
     } catch (error) {

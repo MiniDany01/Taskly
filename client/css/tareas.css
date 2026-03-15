@@ -369,6 +369,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 100;
+  overflow: visible;
 }
 
 .modal.active {
@@ -636,6 +637,27 @@ body {
 .mobile-menu-btn i {
   width: 20px;
   height: 20px;
+}
+
+.ts-dropdown {
+  z-index: 2000 !important;
+}
+
+.ts-wrapper {
+  position: relative;
+  z-index: 2000;
+}
+
+.ts-control {
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  padding: 10px;
+  font-size: 14px;
+}
+
+.ts-dropdown-content {
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 /* RESPONSIVE */

@@ -1,17 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets//images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/favicon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/images/favicon-512x512.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="../assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <title>Taskly</title>
-</head>
-<body">
-    <h1>Taskly Frontend</h1>
-    <a href="./pages/login">LOGIN</a>
-</body>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <i data-lucide="check-square"></i>
+        <span>Taskly</span>
+      </div>
+
+      <nav class="nav-links">
+        <!-- <a href="/">Inicio</a> -->
+        <a href="/pages/funciones">Funciones</a>
+        <a href="./pages/como-funciona">¿Cómo funciona?</a>
+
+        <a href="/pages/login" class="btn-secondary">Acceder</a>
+        <a href="/pages/register" class="btn-primary">Crear cuenta</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text" data-aos="fade-right">
+          <h1>Organiza tus tareas académicas sin estrés</h1>
+
+          <p>
+            Taskly te ayuda a organizar materias, tareas y fechas de entrega en
+            un solo lugar para que nunca olvides una entrega importante.
+          </p>
+        </div>
+
+        <div class="hero-preview" data-aos="fade-left">
+          <div class="preview-card">
+            <div class="preview-header">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+            </div>
+
+            <div class="preview-body">
+              <div class="preview-task">
+                <span class="task-color blue"></span>
+                Tarea de matemáticas
+              </div>
+
+              <div class="preview-task">
+                <span class="task-color green"></span>
+                Proyecto de programación
+              </div>
+
+              <div class="preview-task">
+                <span class="task-color orange"></span>
+                Ensayo de historia
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="dashboard-container">
+        <div class="dashboard-text">
+          <h2>Todo tu semestre en un solo dashboard</h2>
+
+          <p>
+            Visualiza tus tareas, próximas entregas y progreso semanal desde un
+            panel simple y claro.
+          </p>
+
+          <ul>
+            <li><i data-lucide="check"></i> Próximas entregas</li>
+            <li><i data-lucide="check"></i> Tareas urgentes</li>
+            <li><i data-lucide="check"></i> Estadísticas de progreso</li>
+          </ul>
+        </div>
+
+        <div class="dashboard-preview" data-aos="zoom-in">
+          <div class="mockup">
+            <div class="mockup-header">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+
+            <img
+              src="./assets/images/dashboard-preview.png"
+              alt="Dashboard Taskly"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features">
+      <h2>Todo lo que necesitas para organizar tu semestre</h2>
+
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <i data-lucide="book-open"></i>
+          <h3>Materias</h3>
+          <p>
+            Crea materias con colores personalizados para organizar mejor tus
+            tareas.
+          </p>
+        </div>
+
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <i data-lucide="check-square"></i>
+          <h3>Tareas</h3>
+          <p>Gestiona tus tareas y marca las que ya completaste.</p>
+        </div>
+
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <i data-lucide="calendar"></i>
+          <h3>Calendario</h3>
+          <p>Visualiza todas tus entregas en un calendario claro.</p>
+        </div>
+
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <i data-lucide="mail"></i>
+          <h3>Recordatorios</h3>
+          <p>Recibe recordatorios por correo antes de que tus tareas venzan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+
+    <section class="steps">
+      <h2>¿Cómo funciona?</h2>
+
+      <div class="steps-grid">
+        <div class="step" data-aos="fade-up">
+          <i data-lucide="user-plus"></i>
+          <h3>Crea tu cuenta</h3>
+          <p>Regístrate en segundos y empieza a organizar tu semestre.</p>
+        </div>
+
+        <div class="step" data-aos="fade-up">
+          <i data-lucide="folder-plus"></i>
+          <h3>Agrega materias</h3>
+          <p>Crea tus materias y empieza a registrar tus tareas.</p>
+        </div>
+
+        <div class="step" data-aos="fade-up">
+          <i data-lucide="bell"></i>
+          <h3>Recibe recordatorios</h3>
+          <p>Taskly te avisa antes de que tus tareas venzan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta">
+      <h2>Empieza a organizar tus tareas hoy</h2>
+
+      <a href="/pages/register" class="btn-primary big">
+        Crear cuenta gratis
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <i data-lucide="check-square"></i>
+            <span>Taskly</span>
+          </div>
+
+          <p>Organiza tus materias, tareas y entregas en un solo lugar.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Producto</h4>
+            <a href="./pages/funciones">Funciones</a>
+            <a href="./pages/como-funciona">¿Cómo funciona?</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Cuenta</h4>
+            <a href="/pages/login">Iniciar sesión</a>
+            <a href="/pages/register">Crear cuenta</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">© 2026 Taskly — Organizador académico</div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        easing: "ease-out-cubic",
+        once: true,
+      });
+
+      const navbar = document.querySelector(".navbar");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      lucide.createIcons();
+    </script>
+  </body>
 </html>
