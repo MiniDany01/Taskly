@@ -249,6 +249,27 @@ function resetModal() {
   document.querySelector('[data-color="#007bff"]').classList.add("selected");
 }
 
+function formatCreatedAt(dateString) {
+  const created = new Date(dateString);
+  const now = new Date();
+
+  const diff = now - created;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  if (days === 0) return "Creada hoy";
+  if (days === 1) return "Creada hace 1 día";
+  if (days < 30) return `Creada hace ${days} días`;
+
+  const months = Math.floor(days / 30);
+
+  if (months === 1) return "Creada hace 1 mes";
+  if (months < 12) return `Creada hace ${months} meses`;
+
+  const years = Math.floor(months / 12);
+  return `Creada hace ${years} año(s)`;
+}
+
 async function loadSubjects() {
   const token = getToken();
   const emptyState = document.getElementById("emptyState");
@@ -309,7 +330,8 @@ async function loadSubjects() {
       </div>
 
       <div class="subject-footer">
-        <span>Creada recientemente</span>
+        <i data-lucide="clock"></i>
+        <span>${formatCreatedAt(subject.createdAt)}</span>
       </div>
     `;
 
