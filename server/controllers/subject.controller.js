@@ -36,6 +36,7 @@ const getSubjects = async (req, res) => {
 
     const subjects = await prisma.subject.findMany({
       where: { userId },
+      orderBy: { createdAt: "asc" },
       include: {
         _count: {
           select: {
