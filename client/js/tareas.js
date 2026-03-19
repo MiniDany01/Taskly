@@ -2,6 +2,10 @@ let subjectSelect;
 let taskToDelete = null;
 let editingTask = null;
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 function getToken() {
   return localStorage.getItem("token") || sessionStorage.getItem("token");
 }
@@ -120,7 +124,7 @@ function initTaskActions() {
     const taskId = taskItem.dataset.id;
 
     try {
-      const res = await fetch(`/api/tasks/${taskId}/toggle`, {
+      const res = await fetch(`${API_URL}/api/tasks/${taskId}/toggle`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -151,7 +155,7 @@ function initTaskActions() {
     const taskId = urgentBtn.dataset.id;
 
     try {
-      const res = await fetch(`/api/tasks/${taskId}/urgent`, {
+      const res = await fetch(`${API_URL}/api/tasks/${taskId}/urgent`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -244,7 +248,7 @@ function initDeleteModal() {
       const taskId = taskToDelete.dataset.id;
 
       try {
-        const res = await fetch(`/api/tasks/${taskId}`, {
+        const res = await fetch(`${API_URL}/api/tasks/${taskId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -315,12 +319,12 @@ function initTaskModal() {
     const fullDate = new Date(`${dueDate}T${dueTime}`).toISOString();
 
     try {
-      let url = "/api/tasks";
+      let url = `${API_URL}/api/tasks`;
       let method = "POST";
 
       if (editingTask) {
         const taskId = editingTask.dataset.id;
-        url = `/api/tasks/${taskId}`;
+        url = `${API_URL}/api/tasks/${taskId}`;
         method = "PUT";
       }
 
@@ -363,7 +367,7 @@ function initTaskModal() {
 
 async function loadTasks() {
   try {
-    const res = await fetch("/api/tasks", {
+    const res = await fetch(`${API_URL}/api/tasks`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -600,7 +604,7 @@ function closeAllDropdowns() {
 ================================ */
 
 async function loadSubjectsForSelect() {
-  const res = await fetch("/api/subjects", {
+  const res = await fetch(`${API_URL}/api/subjects`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

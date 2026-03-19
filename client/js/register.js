@@ -16,6 +16,10 @@ const notyf = new Notyf({
   ],
 });
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 function tooglePassword() {
   const passwordInput = document.getElementById("password");
   const eyeIcon = document.querySelector(".eye-icon");
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

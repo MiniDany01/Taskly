@@ -1,4 +1,7 @@
 let calendar;
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
 
 const notyf = new Notyf({
   duration: 2500,
@@ -127,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const taskId = info.event.extendedProps.taskId;
 
       try {
-        const res = await fetch(`/api/tasks/${taskId}`, {
+        const res = await fetch(`${API_URL}/api/tasks/${taskId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -216,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadCalendarTasks() {
-  const res = await fetch("/api/calendar/tasks", {
+  const res = await fetch(`${API_URL}/api/calendar/tasks`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

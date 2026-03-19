@@ -9,6 +9,10 @@ function getUser() {
   );
 }
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
@@ -71,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadStats() {
   try {
-    const res = await fetch("/api/stats", {
+    const res = await fetch(`${API_URL}/api/stats`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },

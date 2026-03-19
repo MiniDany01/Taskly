@@ -1,5 +1,9 @@
 let allUpcomingTasks = [];
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 function getToken() {
   return localStorage.getItem("token") || sessionStorage.getItem("token");
 }
@@ -225,17 +229,17 @@ async function loadDashboard() {
     const token = getToken();
 
     const [upcomingRes, urgentRes, summaryRes] = await Promise.all([
-      fetch("/api/dashboard/upcoming", {
+      fetch(`${API_URL}/api/dashboard/upcoming`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       }),
-      fetch("/api/dashboard/urgent", {
+      fetch(`${API_URL}/api/dashboard/urgent`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       }),
-      fetch("/api/dashboard/summary", {
+      fetch(`${API_URL}/api/dashboard/summary`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       }),
     ]);

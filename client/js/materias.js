@@ -2,6 +2,10 @@ let selectedColor = "#007bff";
 let editingSubjectId = null;
 let subjectToDelete = null;
 
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 const notyf = new Notyf({
   duration: 2500,
   dismissible: false,
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!subjectToDelete) return;
 
       try {
-        const res = await fetch(`/api/subjects/${subjectToDelete}`, {
+        const res = await fetch(`${API_URL}/api/subjects/${subjectToDelete}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -207,7 +211,7 @@ document.getElementById("saveSubject").addEventListener("click", async () => {
 
   if (editingSubjectId) {
     // 🔥 MODO EDITAR
-    await fetch(`/api/subjects/${editingSubjectId}`, {
+    await fetch(`${API_URL}/api/subjects/${editingSubjectId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -218,7 +222,7 @@ document.getElementById("saveSubject").addEventListener("click", async () => {
     resetModal();
   } else {
     // 🔥 MODO CREAR
-    await fetch("/api/subjects", {
+    await fetch(`${API_URL}/api/subjects`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -275,7 +279,7 @@ async function loadSubjects() {
   const emptyState = document.getElementById("emptyState");
   const container = document.getElementById("subjectsContainer");
 
-  const res = await fetch("/api/subjects", {
+  const res = await fetch(`${API_URL}/api/subjects`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

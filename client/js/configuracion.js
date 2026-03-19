@@ -1,3 +1,7 @@
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://taskly-c6ba.onrender.com";
+
 const notyf = new Notyf({
   duration: 2500,
   dismissible: false,
@@ -87,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const reminder = document.getElementById("taskReminder").value;
 
       try {
-        const res = await fetch("/api/users/reminder", {
+        const res = await fetch(`${API_URL}/api/users/reminder`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -121,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const confirmPassword = document.getElementById("confirmPassword").value;
 
       try {
-        const res = await fetch("/api/users/me/password", {
+        const res = await fetch(`${API_URL}/api/users/me/password`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -159,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch("/api/users/me/name", {
+      const res = await fetch(`${API_URL}/api/users/me/name`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -197,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================= */
   toggle2FA.addEventListener("click", async () => {
     try {
-      const res = await fetch("/api/users/me/2fa/setup", {
+      const res = await fetch(`${API_URL}/api/users/me/2fa/setup`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -226,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch("/api/users/me/2fa/verify", {
+      const res = await fetch(`${API_URL}/api/users/me/2fa/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -275,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================= */
 async function loadUserData() {
   try {
-    const res = await fetch("/api/users/me", {
+    const res = await fetch(`${API_URL}/api/users/me`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -372,7 +376,7 @@ function setupPasswordToggles() {
 }
 
 async function loadProfile() {
-  const res = await fetch("/api/users/me", {
+  const res = await fetch(`${API_URL}/api/users/me`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
