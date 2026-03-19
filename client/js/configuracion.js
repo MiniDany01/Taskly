@@ -1,6 +1,7 @@
-const API_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:3000"
-  : "https://taskly-c6ba.onrender.com";
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://taskly-c6ba.onrender.com";
 
 const notyf = new Notyf({
   duration: 2500,

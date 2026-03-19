@@ -16,9 +16,10 @@ const notyf = new Notyf({
   ],
 });
 
-const API_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:3000"
-  : "https://taskly-c6ba.onrender.com";
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://taskly-c6ba.onrender.com";
 
 function tooglePassword() {
   const passwordInput = document.getElementById("password");
