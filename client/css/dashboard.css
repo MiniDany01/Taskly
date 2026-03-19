@@ -699,6 +699,84 @@ body {
   height: 20px;
 }
 
+/* MODAL DE BETA */
+/* ===== BETA MODAL ===== */
+
+.beta-modal .modal-content {
+  text-align: center;
+  padding: 32px 28px;
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+
+  animation: betaFade 0.25s ease;
+}
+
+/* ICONO */
+.beta-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 10px;
+
+  border-radius: 14px;
+  background: rgba(0, 123, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beta-icon i {
+  width: 26px;
+  height: 26px;
+  color: var(--color-primary);
+}
+
+/* TITULO */
+.beta-modal h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* TEXTO */
+.beta-modal p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* BOTON */
+.beta-modal button {
+  margin-top: 10px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.beta-modal button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* ANIMACION */
+@keyframes betaFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .dashboard-grid {
