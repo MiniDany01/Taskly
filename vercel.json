@@ -1,0 +1,18 @@
+{
+  "routes": [
+    { "src": "^/$", "dest": "/index.html" },
+
+    { "src": "/login", "dest": "/pages/login.html" },
+    { "src": "/register", "dest": "/pages/register.html" },
+    { "src": "/dashboard", "dest": "/pages/dashboard.html" },
+    { "src": "/calendario", "dest": "/pages/calendario.html" },
+    { "src": "/como-funciona", "dest": "/pages/como-funciona.html" },
+    { "src": "/configuracion", "dest": "/pages/configuracion.html" },
+    { "src": "/estadisticas", "dest": "/pages/estadisticas.html" },
+    { "src": "/funciones", "dest": "/pages/funciones.html" },
+    { "src": "/materias", "dest": "/pages/materias.html" },
+    { "src": "/tareas", "dest": "/pages/tareas.html" }
+
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
