@@ -1,16 +1,16 @@
 {
   "name": "taskly-2.0",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Taskly - SaaS web app",
+  "main": "server/index.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^5.15.0",
     "bcrypt": "^6.0.0",
