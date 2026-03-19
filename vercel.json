@@ -1,18 +1,16 @@
 {
-  "routes": [
-    { "src": "^/$", "dest": "/index.html" },
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
 
-    { "src": "/login", "dest": "/pages/login.html" },
-    { "src": "/register", "dest": "/pages/register.html" },
-    { "src": "/dashboard", "dest": "/pages/dashboard.html" },
-    { "src": "/calendario", "dest": "/pages/calendario.html" },
-    { "src": "/como-funciona", "dest": "/pages/como-funciona.html" },
-    { "src": "/configuracion", "dest": "/pages/configuracion.html" },
-    { "src": "/estadisticas", "dest": "/pages/estadisticas.html" },
-    { "src": "/funciones", "dest": "/pages/funciones.html" },
-    { "src": "/materias", "dest": "/pages/materias.html" },
-    { "src": "/tareas", "dest": "/pages/tareas.html" }
-
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "source": "/login", "destination": "/pages/login.html" },
+    { "source": "/register", "destination": "/pages/register.html" },
+    { "source": "/dashboard", "destination": "/pages/dashboard.html" },
+    { "source": "/calendario", "destination": "/pages/calendario.html" },
+    { "source": "/como-funciona", "destination": "/pages/como-funciona.html" },
+    { "source": "/configuracion", "destination": "/pages/configuracion.html" },
+    { "source": "/estadisticas", "destination": "/pages/estadisticas.html" },
+    { "source": "/funciones", "destination": "/pages/funciones.html" },
+    { "source": "/materias", "destination": "/pages/materias.html" },
+    { "source": "/tareas", "destination": "/pages/tareas.html" }
   ]
 }
