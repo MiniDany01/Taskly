@@ -11,7 +11,7 @@
     { "src": "/estadisticas", "dest": "/pages/estadisticas.html" },
     { "src": "/funciones", "dest": "/pages/funciones.html" },
     { "src": "/materias", "dest": "/pages/materias.html" },
-    { "src": "/tareas", "dest": "/pages/tareas.html" }
+    { "src": "/tareas", "dest": "/pages/tareas.html" },
 
     { "src": "/(.*)", "dest": "/index.html" }
   ]
