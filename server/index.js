@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const path = require("path");
 const authRoutes = require("./routes/auth.routes");
@@ -10,6 +11,14 @@ const calendarRoutes = require("./routes/calendar.routes");
 const statsRoutes = require("./routes/stats.routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(
+  cors({
+    origin: "https://taskly-lilac-nine.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  }),
+);
 
 require("./jobs/reminder.job");
 
