@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("close2FA");
 
   if (!token || !user) {
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
     return;
   }
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
   });
 
   document

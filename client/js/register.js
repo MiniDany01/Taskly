@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name.value = "";
 
       setTimeout(() => {
-        window.location.href = "/pages/login";
+        window.location.href = "/login";
       }, 500);
     } catch (error) {
       notyf.error("Error al conectar con el servidor");

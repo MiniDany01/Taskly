@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = getToken();
   const user = getUser();
   if (!token || !user) {
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
     return;
   }
 
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
   });
 
   const sidebar = document.querySelector(".sidebar");

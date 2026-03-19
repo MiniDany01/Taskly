@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userName = document.querySelector(".user-info strong");
 
   if (!token || !user) {
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
     return;
   }
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location.href = "/pages/login";
+    window.location.href = "/login";
   });
 
   const mobileBtn = document.getElementById("mobileMenuBtn");

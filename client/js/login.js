@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // password.value = ""
 
       setTimeout(() => {
-        window.location.href = "/pages/dashboard";
+        window.location.href = "/dashboard";
       }, 1500);
     } catch (error) {
       notyf.error("Error al conectar con el servidor");
