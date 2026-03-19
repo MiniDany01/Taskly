@@ -458,6 +458,19 @@ body {
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
+.subject-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #777;
+}
+
+.subject-footer i {
+  width: 14px;
+  height: 14px;
+}
+
 /* DELETE MODAL */
 .delete-modal {
   text-align: center;
