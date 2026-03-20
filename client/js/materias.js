@@ -156,7 +156,33 @@ document.addEventListener("DOMContentLoaded", () => {
       sidebar.classList.remove("open");
     }
   });
+
+  const subjectModal = document.getElementById("subjectModal");
+  const modalContent = subjectModal.querySelector(".modal-content");
+
+  modal.addEventListener("click", (e) => {
+    if (!modalContent.contains(e.target)) {
+      subjectModal.classList.remove("active");
+      resetModal();
+    }
+  });
 });
+
+function resetTaskModal() {
+  document.getElementById("taskTitle").value = "";
+  document.getElementById("taskDescription").value = "";
+  document.getElementById("taskDueDate").value = "";
+  document.getElementById("taskDueTime").value = "";
+
+  // reset contador
+  const charCount = document.getElementById("charCount");
+  if (charCount) {
+    charCount.textContent = "0/150";
+    charCount.style.color = "#9ca3af";
+  }
+
+  if (subjectSelect) subjectSelect.clear();
+}
 
 document.addEventListener("click", (e) => {
   const menuBtn = e.target.closest(".subject-menu");

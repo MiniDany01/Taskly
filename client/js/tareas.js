@@ -85,6 +85,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const descriptionInput = document.getElementById("taskDescription");
+  const charCount = document.getElementById("charCount");
+
+  if (descriptionInput && charCount) {
+    descriptionInput.addEventListener("input", () => {
+      const length = descriptionInput.value.length;
+
+      charCount.textContent = `${length}/50`;
+
+      if (length > 50) {
+        charCount.style.color = "#ff4d4f";
+      } else {
+        charCount.style.color = "#999";
+      }
+    });
+  }
+
+  const modal = document.getElementById("taskModal");
+  const modalContent = modal.querySelector(".modal-content");
+
+  // Cerrar al hacer click fuera
+  modal.addEventListener("click", (e) => {
+    if (!modalContent.contains(e.target)) {
+      modal.classList.remove("active");
+      resetTaskModal(); // opcional pero recomendado
+    }
+  });
+
   initTabs();
   initTaskActions();
   initDeleteModal();
@@ -92,6 +120,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadTasks();
 });
+
+function resetTaskModal() {
+  document.getElementById("taskTitle").value = "";
+  document.getElementById("taskDescription").value = "";
+  document.getElementById("taskDueDate").value = "";
+  document.getElementById("taskDueTime").value = "";
+
+  // reset contador
+  const charCount = document.getElementById("charCount");
+  if (charCount) {
+    charCount.textContent = "0/150";
+    charCount.style.color = "#9ca3af";
+  }
+
+  if (subjectSelect) subjectSelect.clear();
+}
 
 /* ===============================
    TABS
@@ -282,6 +326,7 @@ function initTaskModal() {
   openModalBtn.addEventListener("click", async () => {
     editingTask = null;
 
+    const charCount = document.getElementById("charCount");
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("taskDueDate").min = today;
 
@@ -297,6 +342,11 @@ function initTaskModal() {
 
     if (subjectSelect) subjectSelect.clear();
 
+    if (charCount) {
+      charCount.textContent = "0/50";
+      charCount.style.color = "#999";
+    }
+
     taskModal.classList.add("active");
   });
 
@@ -311,9 +361,15 @@ function initTaskModal() {
     const dueDate = document.getElementById("taskDueDate").value;
     const dueTime = document.getElementById("taskDueTime").value || "23:59";
     const subjectId = subjectSelect.getValue();
+    const descriptionInput = document.getElementById("taskDescription").value;
 
     if (!title || !dueDate || !subjectId) {
       notyf.error("Completa los campos obligatorios");
+      return;
+    }
+
+    if (descriptionInput.length > 50) {
+      notyf.error("La descripción no puede superar los 50 caracteres");
       return;
     }
 
@@ -603,7 +659,6 @@ function closeAllDropdowns() {
 /* ===============================
    CARGAR MATERIAS
 ================================ */
-
 async function loadSubjectsForSelect() {
   const res = await fetch(`${API_URL}/api/subjects`, {
     headers: {
@@ -613,19 +668,28 @@ async function loadSubjectsForSelect() {
 
   const subjects = await res.json();
 
-  const select = document.getElementById("taskSubject");
+  console.log("Subjects:", subjects);
 
-  select.innerHTML = `<option value="">Selecciona una materia</option>`;
+  const selectElement = document.getElementById("taskSubject");
+
+  if (!selectElement) return;
+
+  // 🔥 destruir instancia anterior SI EXISTE
+  if (subjectSelect) {
+    subjectSelect.destroy();
+  }
+
+  // 🔥 limpiar select nativo
+  selectElement.innerHTML = "";
 
   subjects.forEach((subject) => {
     const option = document.createElement("option");
     option.value = subject.id;
     option.textContent = subject.name;
-    select.appendChild(option);
+    selectElement.appendChild(option);
   });
 
-  if (subjectSelect) subjectSelect.destroy();
-
+  // 🔥 crear TomSelect NUEVO
   subjectSelect = new TomSelect("#taskSubject", {
     create: false,
     searchField: [],

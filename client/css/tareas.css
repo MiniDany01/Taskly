@@ -384,6 +384,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  overflow: visible;
 }
 
 .modal-content select {
@@ -426,6 +427,15 @@ body {
   transform: translateY(-2px);
   background: #d1d5db;
 }
+
+#charCount {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: right;
+  margin-top: -8px;
+}
+
+/* FIN MODAL */
 
 /* BOTONES TAREAS COMPLETAS / PENDIENTES */
 .task-tabs {
@@ -640,7 +650,10 @@ body {
 }
 
 .ts-dropdown {
-  z-index: 2000 !important;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 9999;
+  border-radius: 10px;
 }
 
 .ts-wrapper {
