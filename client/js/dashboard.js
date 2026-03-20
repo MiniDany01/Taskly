@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
+
+    sessionStorage.removeItem("betaShown");
+    localStorage.removeItem("betaShown");
     window.location.href = "/login";
   });
 
@@ -63,7 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
   });
 
-  document.getElementById("betaModal").classList.add("active");
+  const betaModal = document.getElementById("betaModal");
+
+  if (!sessionStorage.getItem("betaShown")) {
+    betaModal.classList.add("active");
+
+    sessionStorage.setItem("betaShown", "true");
+  }
 
   document.getElementById("closeBeta").addEventListener("click", () => {
     document.getElementById("betaModal").classList.remove("active");
