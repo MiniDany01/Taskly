@@ -14,7 +14,17 @@
   </head>
 
   <body>
+    <div class="beta-banner">
+      <i data-lucide="flask-conical"></i>
+      <span>
+        Taskly está en versión beta — Algunas funciones pueden cambiar o
+        presentar errores.
+      </span>
+    </div>
     <header class="navbar">
+      <button class="menu-btn">
+        <i data-lucide="menu"></i>
+      </button>
       <div class="logo">
         <i data-lucide="check-square"></i>
         <span>Taskly</span>
@@ -29,6 +39,13 @@
         <a href="/register" class="btn-primary">Crear cuenta</a>
       </nav>
     </header>
+
+    <div class="mobile-menu">
+      <a href="/funciones">Funciones</a>
+      <a href="/como-funciona">¿Cómo funciona?</a>
+      <a href="/login">Acceder</a>
+      <a href="/register" class="btn-primary">Crear cuenta</a>
+    </div>
 
     <!-- HERO -->
 
@@ -220,6 +237,23 @@
         } else {
           navbar.classList.remove("scrolled");
         }
+      });
+
+      const menuBtn = document.querySelector(".menu-btn");
+      const mobileMenu = document.querySelector(".mobile-menu");
+
+      document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+        });
+      });
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+
+        document.body.style.overflow = mobileMenu.classList.contains("active")
+          ? "hidden"
+          : "auto";
       });
 
       lucide.createIcons();

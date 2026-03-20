@@ -63,13 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
   });
 
-  if (!localStorage.getItem("betaSeen")) {
-    document.getElementById("betaModal").classList.add("active");
-  }
+  document.getElementById("betaModal").classList.add("active");
 
   document.getElementById("closeBeta").addEventListener("click", () => {
     document.getElementById("betaModal").classList.remove("active");
-    localStorage.setItem("betaSeen", "true");
   });
 
   const viewAllBtn = document.getElementById("viewAllTasks");
