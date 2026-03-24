@@ -130,7 +130,7 @@ function resetTaskModal() {
   // reset contador
   const charCount = document.getElementById("charCount");
   if (charCount) {
-    charCount.textContent = "0/150";
+    charCount.textContent = "0/50";
     charCount.style.color = "#9ca3af";
   }
 
@@ -245,18 +245,35 @@ function initTaskActions() {
     document.getElementById("taskTitle").value = title || "";
     document.getElementById("taskDescription").value = descriptionText;
 
-    const localDate = new Date(rawDate);
+    const date = new Date(rawDate);
 
-    document.getElementById("taskDueDate").value =
-      localDate.getFullYear() +
-      "-" +
-      String(localDate.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(localDate.getDate()).padStart(2, "0");
+    const formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Mexico_City",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
 
-    document.getElementById("taskDueTime").value = localDate
-      .toTimeString()
-      .slice(0, 5);
+    const parts = formatter.formatToParts(date);
+
+    const year = parts.find((p) => p.type === "year").value;
+    const month = parts.find((p) => p.type === "month").value;
+    const day = parts.find((p) => p.type === "day").value;
+
+    document.getElementById("taskDueDate").value = `${year}-${month}-${day}`;
+
+    const timeFormatter = new Intl.DateTimeFormat("es-MX", {
+      timeZone: "America/Mexico_City",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    const timeParts = timeFormatter.formatToParts(date);
+    const hours = timeParts.find((p) => p.type === "hour").value;
+    const minutes = timeParts.find((p) => p.type === "minute").value;
+
+    document.getElementById("taskDueTime").value = `${hours}:${minutes}`;
 
     if (subjectSelect) subjectSelect.setValue(subjectId);
 
@@ -447,6 +464,29 @@ async function loadTasks() {
   }
 }
 
+function formatLocalDate(dateString) {
+  const date = new Date(dateString);
+
+  return new Intl.DateTimeFormat("es-MX", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/Mexico_City", // 🔥 CLAVE
+  }).format(date);
+}
+
+function getMexicoTime(dateString) {
+  const date = new Date(dateString);
+
+  const utc = date.getTime() + date.getTimezoneOffset() * 60000;
+
+  const mexicoOffset = -6 * 60 * 60000; // UTC-6
+
+  return utc + mexicoOffset;
+}
 /* ===============================
    RENDER
 ================================ */
@@ -454,13 +494,7 @@ async function loadTasks() {
 function addTaskToDOM(task) {
   const container = document.getElementById("tasksContainer");
 
-  const formattedDate = new Date(task.dueDate).toLocaleString("es-MX", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const formattedDate = formatLocalDate(task.dueDate);
 
   const taskElement = document.createElement("div");
 
@@ -471,8 +505,8 @@ function addTaskToDOM(task) {
   taskElement.dataset.description = task.description ?? "";
   taskElement.dataset.subjectid = task.subjectId;
 
-  const now = Date.now();
-  const dueDate = new Date(task.dueDate).getTime();
+  const now = getMexicoTime(new Date().toISOString());
+  const dueDate = getMexicoTime(task.dueDate);
 
   const isOverdue = !task.completed && dueDate < now;
 
