@@ -1,16 +1,24 @@
 const prisma = require("../prismaClient");
 
+function parseLocalDate(dateString) {
+  const [date, time] = dateString.split("T");
+  const [year, month, day] = date.split("-");
+  const [hours, minutes] = time.split(":");
+
+  return new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hours),
+    Number(minutes),
+  );
+}
+
+// CREAR TAREA
 exports.createTask = async (req, res) => {
   try {
     const { title, description, dueDate, subjectId } = req.body;
     const userId = req.user.id;
-    const todayString = new Date().toISOString().split("T")[0];
-
-    if (dueDate < todayString) {
-      return res.status(400).json({
-        message: "No puedes asignar una fecha pasada",
-      });
-    }
 
     if (!title || !dueDate || !subjectId) {
       return res.status(400).json({
@@ -18,11 +26,21 @@ exports.createTask = async (req, res) => {
       });
     }
 
+    const parsedDate = parseLocalDate(dueDate);
+
+    // validar fecha pasada (usando fecha local real)
+    const now = new Date();
+    if (parsedDate < now.setHours(0, 0, 0, 0)) {
+      return res.status(400).json({
+        message: "No puedes asignar una fecha pasada",
+      });
+    }
+
     const task = await prisma.task.create({
       data: {
         title,
         description,
-        dueDate: new Date(dueDate + "Z"),
+        dueDate: parsedDate, // ✅ FIX
         subjectId,
         userId,
       },
@@ -40,6 +58,7 @@ exports.createTask = async (req, res) => {
   }
 };
 
+// OBTENER TAREAS
 exports.getTasks = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -54,16 +73,19 @@ exports.getTasks = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "Error al obtener materias",
+      message: "Error al obtener tareas",
     });
   }
 };
 
+// ACTUALIZAR TAREA
 exports.updateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, dueDate, subjectId } = req.body;
     const userId = req.user.id;
+
+    const parsedDate = parseLocalDate(dueDate);
 
     const task = await prisma.task.update({
       where: {
@@ -73,7 +95,7 @@ exports.updateTask = async (req, res) => {
       data: {
         title,
         description,
-        dueDate: new Date(dueDate),
+        dueDate: parsedDate, // ✅ MISMO FIX
         subjectId,
       },
       include: {
@@ -90,6 +112,7 @@ exports.updateTask = async (req, res) => {
   }
 };
 
+// ELIMINAR TAREA
 exports.deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -102,7 +125,7 @@ exports.deleteTask = async (req, res) => {
       },
     });
 
-    res.json({ message: "Tarea eliminada correctamente " });
+    res.json({ message: "Tarea eliminada correctamente" });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -111,6 +134,7 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
+// TOGGLE COMPLETADO
 exports.toggleTaskStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -143,6 +167,7 @@ exports.toggleTaskStatus = async (req, res) => {
   }
 };
 
+// TOGGLE URGENTE
 exports.toggleUrgentTasks = async (req, res) => {
   try {
     const { id } = req.params;
@@ -176,14 +201,14 @@ exports.toggleUrgentTasks = async (req, res) => {
       }
     }
 
-    const updateTask = await prisma.task.update({
+    const updatedTask = await prisma.task.update({
       where: { id },
       data: {
         urgent: !task.urgent,
       },
     });
 
-    res.json(updateTask);
+    res.json(updatedTask);
   } catch (error) {
     console.error(error);
     res.status(500).json({
