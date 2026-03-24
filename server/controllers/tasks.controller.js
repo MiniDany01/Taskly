@@ -22,7 +22,7 @@ exports.createTask = async (req, res) => {
       data: {
         title,
         description,
-        dueDate: new Date(dueDate),
+        dueDate: new Date(dueDate + "Z"),
         subjectId,
         userId,
       },

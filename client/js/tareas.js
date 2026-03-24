@@ -245,13 +245,16 @@ function initTaskActions() {
     document.getElementById("taskTitle").value = title || "";
     document.getElementById("taskDescription").value = descriptionText;
 
-    const dateObj = new Date(rawDate);
+    const localDate = new Date(rawDate);
 
-    document.getElementById("taskDueDate").value = dateObj
-      .toISOString()
-      .split("T")[0];
+    document.getElementById("taskDueDate").value =
+      localDate.getFullYear() +
+      "-" +
+      String(localDate.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(localDate.getDate()).padStart(2, "0");
 
-    document.getElementById("taskDueTime").value = dateObj
+    document.getElementById("taskDueTime").value = localDate
       .toTimeString()
       .slice(0, 5);
 
@@ -373,7 +376,7 @@ function initTaskModal() {
       return;
     }
 
-    const fullDate = new Date(`${dueDate}T${dueTime}`).toISOString();
+    const fullDate = `${dueDate}T${dueTime}:00`;
 
     try {
       let url = `${API_URL}/api/tasks`;
